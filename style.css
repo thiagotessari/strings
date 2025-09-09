@@ -1,19 +1,22 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"); 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root { 
-  --cor-destaque: #ffffff; 
+  --cor-destaque: #39ff14; /* Verde neon vibrante */
   --cor-gradiente-preto: linear-gradient( 
     113deg, 
     #000 0%, 
     #1e2021 44.96%, 
     #1e2022 100% 
   ); 
+  --fundo-neon: rgba(57, 255, 20, 0.3); /* Fundo mais suave para efeito neon */
 } 
 
 * { 
   margin: 0; 
   padding: 0; 
-  font-family: Montserrat; 
+  font-family: Montserrat, sans-serif; 
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
 } 
 
 body { 
@@ -24,6 +27,7 @@ body {
   background: var(--cor-gradiente-preto); 
   height: 100vh; 
   flex-direction: column; 
+  overflow: hidden;
 } 
 
 .container { 
@@ -33,15 +37,25 @@ body {
   align-items: center; 
   gap: 3rem; 
   overflow: hidden; 
+  box-shadow: 0 0 50px rgba(57, 255, 20, 0.5); /* Sombras externas do container */
+  border-radius: 1rem;
 } 
 
 h1 { 
   color: var(--cor-destaque); 
   text-align: center; 
-  font-size: 2.8rem; 
+  font-size: 3.5rem; 
   font-weight: 600; 
   text-transform: uppercase; 
-} 
+  letter-spacing: 0.1rem;
+  text-shadow: 0 0 15px var(--cor-destaque), 0 0 30px var(--cor-destaque), 0 0 45px var(--cor-destaque); /* Efeito neon */
+  animation: neonGlow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes neonGlow {
+  0% { text-shadow: 0 0 10px var(--cor-destaque), 0 0 15px var(--cor-destaque), 0 0 25px var(--cor-destaque); }
+  100% { text-shadow: 0 0 40px var(--cor-destaque), 0 0 60px var(--cor-destaque), 0 0 80px var(--cor-destaque); }
+}
 
 #entrada-de-texto { 
   display: flex; 
@@ -50,36 +64,61 @@ h1 {
   align-items: flex-start; 
   gap: 0.625rem; 
   align-self: stretch; 
-  border-radius: 0.625rem; 
-  background: #fff; 
+  border-radius: 1rem; 
+  background: #111; 
+  color: #fff; 
   font-size: 2rem; 
-} 
+  border: 2px solid var(--cor-destaque); 
+  box-shadow: 0 0 10px var(--cor-destaque), 0 0 20px var(--cor-destaque); /* Efeito neon */
+  transition: all 0.3s ease;
+  border-top: 2px solid rgba(57, 255, 20, 0.7); /* Destaque no topo */
+}
+
+#entrada-de-texto:focus {
+  outline: none;
+  box-shadow: 0 0 20px var(--cor-destaque), 0 0 30px var(--cor-destaque), 0 0 50px var(--cor-destaque);
+  border-color: var(--cor-destaque); /* Foco com brilho */
+}
 
 #entrada-de-texto::placeholder { 
   color: #828282; 
   font-size: 2rem; 
   font-weight: 400; 
-  line-height: normal; 
 } 
 
 #botao-palavrachave { 
   display: flex; 
-  padding: 1.25rem; 
+  padding: 1.5rem 2.5rem; 
   justify-content: center; 
   align-items: center; 
   gap: 0.625rem; 
-  border-radius: 0.5rem; 
+  border-radius: 1rem; 
   border: none; 
   background: var(--cor-destaque); 
-  color: #000; 
+  color: #111; 
   font-size: 2.5rem; 
   font-weight: 500; 
-  line-height: normal; 
-} 
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff; /* Sombras no texto */
+  box-shadow: 0 0 10px var(--cor-destaque), 0 0 30px var(--cor-destaque); /* Efeito neon */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none; /* Desabilitar seleção de texto */
+}
+
+#botao-palavrachave:hover {
+  background: #32cc1f; /* Cor de fundo no hover */
+  box-shadow: 0 0 30px var(--cor-destaque), 0 0 50px var(--cor-destaque);
+}
+
+#botao-palavrachave:active {
+  background: #39ff14; /* Cor de fundo ao clicar */
+  box-shadow: 0 0 60px var(--cor-destaque), 0 0 100px var(--cor-destaque);
+  transform: scale(0.98); /* Efeito de clique */
+}
 
 #resultado-palavrachave { 
   display: flex; 
-  border-radius: 0.625rem; 
+  border-radius: 1rem; 
   align-self: stretch; 
   color: var(--cor-destaque); 
   font-size: 2.5rem; 
@@ -87,5 +126,24 @@ h1 {
   margin-bottom: 2rem; 
   max-width: 100%; 
   max-height: 50vh; 
-  overflow: auto; 
-} 
+  overflow: auto;
+  text-shadow: 0 0 20px var(--cor-destaque), 0 0 40px var(--cor-destaque); /* Efeito neon */
+  background: rgba(57, 255, 20, 0.1); /* Fundo translúcido com leve tom de neon */
+  padding: 1rem;
+  border: 2px solid var(--cor-destaque); /* Borda neon */
+  box-shadow: 0 0 10px var(--cor-destaque), 0 0 20px var(--cor-destaque);
+}
+
+#resultado-palavrachave::-webkit-scrollbar {
+  width: 10px;
+}
+
+#resultado-palavrachave::-webkit-scrollbar-thumb {
+  background-color: var(--cor-destaque);
+  border-radius: 10px;
+}
+
+#resultado-palavrachave::-webkit-scrollbar-track {
+  background-color: #333;
+}
+
